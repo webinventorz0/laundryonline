@@ -28,12 +28,6 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
-        </div>
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -65,7 +59,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -86,9 +80,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-plus-circle"></i>
                         <p>
-                            Dashboard
+                            Orders
                             <i class="right fas fa-angle-left"></i>
                         </p>
                         </a>
@@ -96,22 +90,46 @@
                         <li class="nav-item">
                             <a href="./index.html" class="nav-link active">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v1</p>
+                            <p>New Order</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="./index2.html" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v2</p>
+                            <p>Complete Orders</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="./index3.html" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v3</p>
+                            <p>Order history</p>
                             </a>
                         </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Customers
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="nav-link">
+                            <i class="nav-icon fa fa-list"></i>
+                            <p>
+                                Derpartments
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="nav-link">
+                            <i class="nav-icon fa fa-user"></i>
+                            <p>
+                                Staff
+                            </p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link">

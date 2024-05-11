@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Auth as Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,20 @@ use Illuminate\Support\Facades\Route;
 // working ..
 Route::get('/', function () {
     return view('welcome');
-});
-// get , post , delete ..
-Route::get('/test',function(){
-    return view('test');
+})->name('main');
+// After Login ..
+Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
+    // Dashboard ..
+    Route::get('/dashboard','pagesController@dashboard')->name('admin.dashboard');
+    Route::get('/customers','pagesController@customer')->name('admin.customer');
 });
 
+
+// Authentication ..
 Auth::routes();
-
+// home ..
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout',function(){
+    Auth::logout();
+    return redirect(route('main'));
+})->name('admin.logout');

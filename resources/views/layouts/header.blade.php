@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title> @yield('title') | LaundryOnline.com</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -88,13 +88,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link active">
+                            <a href="{{ route('new.orders') }}" class="nav-link active">
                             <i class="far fa-circle nav-icon"></i>
                             <p>New Order</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index2.html" class="nav-link">
+                            <a href="{{ route('all.orders') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Complete Orders</p>
                             </a>
@@ -108,7 +108,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('logout') }}" class="nav-link">
+                        <a href="{{ route('admin.customer') }}" class="nav-link">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
                                 Customers
@@ -116,7 +116,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('logout') }}" class="nav-link">
+                        <a href="{{ route('admin.department') }}" class="nav-link">
                             <i class="nav-icon fa fa-list"></i>
                             <p>
                                 Derpartments
@@ -124,7 +124,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('logout') }}" class="nav-link">
+                        <a href="{{ route('admin.staff') }}" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 Staff
@@ -148,7 +148,9 @@
 
   <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <div class="container-fluid">
              @yield('content')
+            </div>
         <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

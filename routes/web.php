@@ -21,7 +21,16 @@ Route::get('/', function () {
 Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
     // Dashboard ..
     Route::get('/dashboard','pagesController@dashboard')->name('admin.dashboard');
-    Route::get('/customers','pagesController@customer')->name('admin.customer');
+    Route::prefix('customers')->group(function(){
+        Route::get('/','pagesController@customer')->name('admin.customer');
+        Route::post('/save','pagesController@save_customer')->name('save.customer');
+    });
+    Route::get('/department','pagesController@department')->name('admin.department');
+    Route::get('/staff','pagesController@staff')->name('admin.staff');
+    Route::prefix('orders')->group(function(){
+        Route::get('/new','pagesController@new_order')->name('new.orders');
+        Route::get('/','pagesController@orders')->name('all.orders');
+    });
 });
 
 

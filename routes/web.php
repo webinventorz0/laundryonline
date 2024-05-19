@@ -24,8 +24,15 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
     Route::prefix('customers')->group(function(){
         Route::get('/','pagesController@customer')->name('admin.customer');
         Route::post('/save','pagesController@save_customer')->name('save.customer');
+        Route::get('/delete/{id}','pagesController@delete_customer')->name('delete.customer');
+        Route::post('/customer/update/{id}','pagesController@update_customer')->name('update.customer');
     });
-    Route::get('/department','pagesController@department')->name('admin.department');
+    // department ..
+    Route::prefix('department')->group(function(){
+        Route::get('/','pagesController@department')->name('admin.department');
+        Route::post('/save','pagesController@department_save')->name('save.department');
+        Route::get('/status/{id}','pagesController@department_status')->name('status.department');
+    });
     Route::get('/staff','pagesController@staff')->name('admin.staff');
     Route::prefix('orders')->group(function(){
         Route::get('/new','pagesController@new_order')->name('new.orders');

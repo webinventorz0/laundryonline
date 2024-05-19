@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap4.css" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -149,7 +150,8 @@
   <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="container-fluid">
-             @yield('content')
+                @include('includes.flash')
+                @yield('content')
             </div>
         <!-- /.content -->
         </div>
@@ -202,5 +204,12 @@
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap4.js"></script>
+    <script>
+        new DataTable('#example');
+    </script>
 </body>
 </html>

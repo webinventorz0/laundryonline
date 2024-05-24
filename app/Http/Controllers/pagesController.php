@@ -96,7 +96,9 @@ class pagesController extends Controller
     }
     // new orders 
     public function new_order(){
-        return view('admin.orders.new');
+        $customers = customer::all();
+        $departments = department::where('status',0)->get();
+        return view('admin.orders.new',compact('customers','departments'));
     }
     // all orders ..
     public function orders(){

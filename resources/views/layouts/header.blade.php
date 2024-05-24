@@ -80,33 +80,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('new.orders') }}" class="nav-link  bg-danger">
                         <i class="nav-icon fas fa-plus-circle"></i>
                         <p>
-                            Orders
-                            <i class="right fas fa-angle-left"></i>
+                            New Orders
                         </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('new.orders') }}" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>New Order</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('all.orders') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Complete Orders</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./index3.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Order history</p>
-                            </a>
-                        </li>
-                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('all.orders') }}" class="nav-link">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            All Orders
+                        </p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.customer') }}" class="nav-link">

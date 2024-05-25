@@ -36,6 +36,8 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
     Route::get('/staff','pagesController@staff')->name('admin.staff');
     Route::prefix('orders')->group(function(){
         Route::get('/new','pagesController@new_order')->name('new.orders');
+        Route::post('save','pagesController@save_order')->name('save.order');
+        Route::get('/details/{id}','pagesController@order_detail')->name('order.details');
         Route::get('/','pagesController@orders')->name('all.orders');
     });
 });

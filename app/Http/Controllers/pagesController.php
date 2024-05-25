@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Models\department;
+use App\Models\order;
 
 class pagesController extends Controller
 {
@@ -99,6 +100,30 @@ class pagesController extends Controller
         $customers = customer::all();
         $departments = department::where('status',0)->get();
         return view('admin.orders.new',compact('customers','departments'));
+    }
+    // save order ..
+    public function save_order(Request $request){   
+        $validated = $request->validate([
+            'customer' => 'required',
+            'type' => 'required',
+            'department' => 'required',
+            'ddate' => 'required',
+
+        ]);
+        $order = new order;
+        $order->customer_id = $request->customer;
+        $order->order_type = $request->type;
+        $order->delivery_type = $request->delivery_type;
+        $order->department_id = $request->department;
+        $order->edd = $request->ddate;
+        $order->save();
+        return redirect(route('order.details',$order->id))->with('success','Order is placed succesfully, please add order details also');
+
+    }
+    // order details ..
+    public function order_detail($id){
+        $order = order::find($id);
+        return view('admin.orders.order_details',compact('order'));
     }
     // all orders ..
     public function orders(){

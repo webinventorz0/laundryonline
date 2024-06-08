@@ -21,6 +21,8 @@ class CreateOrdersTable extends Migration
             $table->integer('department_id')->nullable();
             $table->string('edd')->nullable();
             $table->integer('total')->nullable();
+            $table->integer('advance')->nullable();
+            $table->integer('pending')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });

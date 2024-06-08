@@ -38,7 +38,10 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
         Route::get('/new','pagesController@new_order')->name('new.orders');
         Route::post('save','pagesController@save_order')->name('save.order');
         Route::get('/details/{id}','pagesController@order_detail')->name('order.details');
+        Route::post('/details/save/{id}','pagesController@order_detail_save')->name('orderdetails.save');
+        Route::get('/item/delete/{id}','pagesController@orderdetail')->name('item.delete');
         Route::get('/','pagesController@orders')->name('all.orders');
+        Route::post('/place/{id}','pagesController@place_order')->name('place.order');
     });
 });
 

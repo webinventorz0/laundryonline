@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Models\department;
 use App\Models\order;
+use App\Models\orderdetail;
 
 class pagesController extends Controller
 {
@@ -128,5 +129,57 @@ class pagesController extends Controller
     // all orders ..
     public function orders(){
         return view('admin.orders.orders');
+    }
+    // order details working ..
+    public function order_detail_save($id, Request $request){
+        $validated = $request->validate([
+            'title' => 'required',
+            'qty' => 'required',
+            'ppp' => 'required',
+        ]);   
+        // order table for update sum ..
+        $order = order::find($id);
+        // order details 
+        $orderdetail = new orderdetail;
+        $orderdetail->order_id = $order->id;
+        $orderdetail->name = $request->title;
+        $orderdetail->qty = $request->qty;
+        $orderdetail->price = $request->ppp;
+        $total = $request->qty * $request->ppp;
+        $discount = ($total/100) * $request->discount;
+        $total = $total - $discount;
+        $orderdetail->discount = $request->discount;
+        $orderdetail->total = $total;
+        $orderdetail->save();
+        // end order details ..
+        $orderdetail_sum = orderdetail::where('order_id',$order->id)->sum('total');
+        $order->total = $orderdetail_sum;
+        $order->save();
+        // end order table for update sum ..
+        return redirect()->back()->with('message','Item Added Into Order #'.$order->id.' Succesfully');
+
+    }
+    public function orderdetail($id){
+        $orderdetails = orderdetail::find($id);
+        // updating order ..
+        $order = order::find($orderdetails->order_id);
+        $order->total = $order->total - $orderdetails->total;
+        $order->save();
+        // item delete ..
+        $orderdetails->delete();
+        return redirect()->back()->with('warning','Item Deleted Successfully');
+    }
+    // place order ..
+    public function place_order($id , Request $request){
+        $validated = $request->validate([
+            'advance' => 'required',
+        ]);   
+        $order = order::find($id);
+        $remaining = $order->total - $request->advance;
+        $order->advance = $request->advance;
+        $order->pending = $remaining;
+        $order->status = 1;
+        $order->save();
+        return redirect(route('all.orders'))->with('success','Order Is Placed Succesfully');
     }
 }

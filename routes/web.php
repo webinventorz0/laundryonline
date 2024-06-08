@@ -42,6 +42,7 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
         Route::get('/item/delete/{id}','pagesController@orderdetail')->name('item.delete');
         Route::get('/','pagesController@orders')->name('all.orders');
         Route::post('/place/{id}','pagesController@place_order')->name('place.order');
+        Route::get('/delete/{id}','pagesController@delete_order')->name('delete.order');
     });
 });
 

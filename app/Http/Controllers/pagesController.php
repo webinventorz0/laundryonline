@@ -128,7 +128,8 @@ class pagesController extends Controller
     }
     // all orders ..
     public function orders(){
-        return view('admin.orders.orders');
+        $orders = order::orderby('id','desc')->get();
+        return view('admin.orders.orders',compact('orders'));
     }
     // order details working ..
     public function order_detail_save($id, Request $request){
@@ -181,5 +182,13 @@ class pagesController extends Controller
         $order->status = 1;
         $order->save();
         return redirect(route('all.orders'))->with('success','Order Is Placed Succesfully');
+    }
+    public function delete_order($id){
+        $order = order::find($id);
+        foreach($order->orderdetails as $item){
+            $item->delete();
+        }
+        $order->delete();
+        return redirect()->back()->with('warning','Order Deleted Succesfully');
     }
 }

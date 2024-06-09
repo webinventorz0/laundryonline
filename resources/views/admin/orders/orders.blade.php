@@ -25,17 +25,17 @@
                     <td>{{ $order->total }} PKR</td>
                     <td>{{ $order->advance }} PKR</td>
                     <td>{{ $order->pending }} PKR</td>
-                    <td>
+                    <td align="center">
                         @if($order->status == 1)
-                        <span class="badge badge-success">Active</span>
+                        <span class="badge badge-success float-right">Active</span>
                         @elseif($order->status == 0)
-                        <span class="badge badge-info">Draft</span>
+                        <span class="badge badge-info float-right">Draft</span>
                         @elseif($order->status == 2)
-                        <span class="badge badge-warning">Proccess</span>
-                        @elseif($order->status == 3)
-                        <span class="badge badge-secondary">Completed</span>
+                        <span class="badge badge-warning float-right">Proccess</span>
                         @elseif($order->status == 4)
-                        <span class="badge badge-danger">Cancelled</span>
+                        <span class="badge badge-secondary float-right">Completed</span>
+                        @elseif($order->status == 3)
+                        <span class="badge badge-danger float-right">Cancelled</span>
                         @endif
                     </td>
                     <td>
@@ -53,6 +53,8 @@
                                     </button>
                                     </div>
                                     <div>
+                                        <form action="{{ route('update.order', $order->id) }}" method="get">
+                                            @csrf
                                         <table class="table table-bordered table-striped table-hover">
                                             <tr>
                                                 <th>
@@ -89,9 +91,9 @@
                                                 <span class="badge badge-info float-right">Draft</span>
                                                 @elseif($order->status == 2)
                                                 <span class="badge badge-warning float-right">Proccess</span>
-                                                @elseif($order->status == 3)
-                                                <span class="badge badge-secondary float-right">Completed</span>
                                                 @elseif($order->status == 4)
+                                                <span class="badge badge-secondary float-right">Completed</span>
+                                                @elseif($order->status == 3)
                                                 <span class="badge badge-danger float-right">Cancelled</span>
                                                 @endif
                                                 </td>
@@ -115,7 +117,32 @@
                                                 <td>{{ $item->total }}</td>
                                             </tr>
                                             @endforeach
+                                            <tr class="bg-warning">
+                                                <th>Total</th>
+                                                <th>Advance</th>
+                                                <th colspan="2">Remaining</th>
+                                                <th colspan="2">Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $order->total }} PKR</td>
+                                                <td>{{ $order->advance }} PKR</td>
+                                                <td colspan="2">{{ $order->pending }} PKR</td>
+                                                <td colspan="2">
+                                                    <select name="status" class="form-control" id="">                                                    
+                                                        <option value="0" @if($order->status == 0) selected @endif>Draft</option>
+                                                        <option value="1" @if($order->status == 1) selected @endif>Active</option>
+                                                        <option value="2" @if($order->status == 2) selected @endif>Proccess</option>
+                                                        <option value="3" @if($order->status == 3) selected @endif>Cancelled</option>
+                                                        <option value="4" @if($order->status == 4) selected @endif>Completed</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-sm btn-danger">Update</button>
+                                                </td>
+                                            </tr>
                                         </table>
+                                        </form>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

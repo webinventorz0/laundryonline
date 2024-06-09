@@ -8,12 +8,13 @@
     <table class="table table-bordered table-hover table-stripped">
         <tr>
             <th>Name</th>
+            <th>Orders</th>
             <th>Action</th>
         </tr>
         <form action="{{ route('save.department') }}" method="post">
         @csrf
         <tr>
-            <td>
+            <td colspan="2">
                 <input type="text" class="form-control" name="name">
                 @error('name')
                 <font  color="red"><small>{{ $message }}</small></font>
@@ -36,6 +37,9 @@
                         @endif
                     </td>
                     <td>
+                        <span class="badge badge-danger">{{ $department->orders->count() }}</span>
+                    </td>
+                    <td>
                         @if($department->status == 0)
                         <a href="{{ route('status.department',$department->id) }}">
                         <button class="btn btn-danger btn-sm">Disable</button>
@@ -45,6 +49,9 @@
                             <button class="btn btn-success btn-sm">Enable</button>
                         </a>
                         @endif
+                        <a href="{{ route('order.department',$department->id) }}">
+                        <button class="btn btn-info btn-sm">Details</button>
+                        </a>
                     </td>
                 </tr>
         @endforeach

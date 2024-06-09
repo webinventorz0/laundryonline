@@ -191,4 +191,16 @@ class pagesController extends Controller
         $order->delete();
         return redirect()->back()->with('warning','Order Deleted Succesfully');
     }
+    // update order 
+    public function update_order($id, Request $request){
+        $order = order::find($id);
+        $order->status = $request->status;
+        $order->save();
+        return redirect()->back()->with('message','Order Status Updated Succesfully');
+    }
+    // order department ..
+    public function order_department($id){
+        $orders = order::where('department_id',$id)->get();
+        return view('admin.orders.orders',compact('orders'));
+    }
 }

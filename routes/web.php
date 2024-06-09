@@ -30,6 +30,7 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
     // department ..
     Route::prefix('department')->group(function(){
         Route::get('/','pagesController@department')->name('admin.department');
+        Route::get('/orders/{id}','pagesController@order_department')->name('order.department');
         Route::post('/save','pagesController@department_save')->name('save.department');
         Route::get('/status/{id}','pagesController@department_status')->name('status.department');
     });
@@ -43,6 +44,7 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
         Route::get('/','pagesController@orders')->name('all.orders');
         Route::post('/place/{id}','pagesController@place_order')->name('place.order');
         Route::get('/delete/{id}','pagesController@delete_order')->name('delete.order');
+        Route::get('/update/{id}','pagesController@update_order')->name('update.order');
     });
 });
 

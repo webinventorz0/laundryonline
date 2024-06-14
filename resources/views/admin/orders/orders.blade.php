@@ -10,9 +10,9 @@
             <th>#</th>
             <th>Customer</th>
             <th>What's app</th>
-            <th>Total</th>
             <th>Advance</th>
             <th>Remaining</th>
+            <th>Department</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -22,9 +22,9 @@
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->customer->name }}</td>
                     <td>{{ $order->customer->whatsapp }}</td>
-                    <td>{{ $order->total }} PKR</td>
                     <td>{{ $order->advance }} PKR</td>
                     <td>{{ $order->pending }} PKR</td>
+                    <td>{{ $order->department->name }}</td>
                     <td align="center">
                         @if($order->status == 1)
                         <span class="badge badge-success float-right">Active</span>

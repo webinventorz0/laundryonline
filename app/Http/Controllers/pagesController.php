@@ -7,12 +7,17 @@ use App\Models\customer;
 use App\Models\department;
 use App\Models\order;
 use App\Models\orderdetail;
+use App\Models\User;
 
 class pagesController extends Controller
 {
     // dashboard ..
     public function dashboard(){
-        return view('admin.dashboard');
+        $orders = order::all();
+        $customers = customer::all();
+        $departments = department::all();
+        $users = User::all();
+        return view('admin.dashboard',compact('orders','customers','departments','users'));
     }
     // customer ..
     public function customer(){

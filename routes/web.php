@@ -46,6 +46,20 @@ Route::namespace('App\Http\Controllers')->middleware('auth')->group(function(){
         Route::get('/delete/{id}','pagesController@delete_order')->name('delete.order');
         Route::get('/update/{id}','pagesController@update_order')->name('update.order');
     });
+    Route::prefix('users')->group(function(){
+        Route::get('/create','pagesController@users')->name('add.user');
+        Route::get('/roles','pagesController@roles')->name('role.user');
+        Route::post('/roles/save','pagesController@role_save')->name('role.save');
+        Route::get('/roles/delete/{id}','pagesController@del_role')->name('role.delete');
+        Route::prefix('permissions')->group(function(){
+            Route::get('/','pagesController@permissions')->name('permission.user');
+            Route::post('/save','pagesController@permission_save')->name('permission.save');
+            Route::get('/delete/{id}','pagesController@permission_delete')->name('permission.delete');
+            Route::get('/grant/{id}','pagesController@grantpermission')->name('permission.grant');
+            Route::post('/granted/{id}','pagesController@grantedpermission')->name('permission.granted');
+        });
+
+    });
 });
 
 

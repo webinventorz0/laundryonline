@@ -122,6 +122,35 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            User Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('add.user') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>All Users</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('role.user') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('permission.user') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Permisions</p>
+                            </a>
+                        </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link">
                             <i class="nav-icon fa fa-sign-out-alt"></i>
                             <p>

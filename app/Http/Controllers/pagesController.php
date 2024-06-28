@@ -8,6 +8,9 @@ use App\Models\department;
 use App\Models\order;
 use App\Models\orderdetail;
 use App\Models\User;
+use App\Models\role;
+use App\Models\permission;
+use App\Models\grantpermission;
 
 class pagesController extends Controller
 {
@@ -207,5 +210,75 @@ class pagesController extends Controller
     public function order_department($id){
         $orders = order::where('department_id',$id)->get();
         return view('admin.orders.orders',compact('orders'));
+    }
+    // all users ..
+    public function users(){
+        return view('admin.users.users');
+    }
+    // permissions ...
+    public function permissions(){
+        $permissions = permission::all();
+        return view('admin.users.permissions',compact('permissions'));
+    }
+    public function permission_save(Request $request){
+        $validated = $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'routename' => 'required',
+        ]); 
+        $permission = new permission;
+        $permission->title = $request->title;
+        $permission->slug = $request->slug;
+        $permission->route_name = $request->routename;
+        $permission->save();
+        return redirect()->back()->with('success','Route Added Succesfully');
+    }
+    public function permission_delete($id){ 
+        $permission = permission::find($id);
+        $permission->delete();
+        return redirect()->back()->with('warning','Route Deleted Succesfully');
+    }
+    public function grantpermission($id){
+        $grantedpermission = grantpermission::all();
+        $permissions = permission::all();
+        $role = role::find($id);
+        return view('admin.users.grantpermissions',compact('permissions','role','grantedpermission'));
+    }
+    public function grantedpermission($id,Request $request){
+        $gp = $request->permission_granted;
+        $grant_permissoin_table = grantpermission::where('role_id',$id)->get();
+        if($grant_permissoin_table->count() > 0){
+            foreach($grant_permissoin_table as $gpt){
+                $gpt->delete();
+            }
+        }
+        foreach($gp as $granted_permission){
+            $grant = new grantpermission;
+            $grant->role_id = $id;
+            $grant->permission_id = $granted_permission;
+            $grant->save();
+        }
+        return redirect()->back()->with('success','Permission Granted Succesfully');
+    }
+    // role s..
+    public function roles(){
+        $roles = role::orderby('id','desc')->get();
+        return view('admin.users.roles',compact('roles'));
+    }
+    // roles ..
+    public function role_save(Request $request){
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+        ]);
+
+        $role = new role;
+        $role->title = $request->title;
+        $role->save();
+        return redirect()->back()->with('success','New Role Created Succesfully');
+    }
+    public function del_role($id){
+        $role = role::find($id);
+        $role->delete();
+        return redirect()->back()->with('warning','Role Deleted Succesfully');
     }
 }
